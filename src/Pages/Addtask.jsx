@@ -9,10 +9,10 @@ import { Form, Button, Col, Container } from 'react-bootstrap';
 function Addtask(props) {
   
     const [credentials, setCredentials] = useState({
-        person: undefined,
-        designation: undefined,
-        email:undefined,
-        mobile:undefined
+        Name: undefined,
+    Priority: undefined,
+    Status:undefined,
+        Enddate:undefined
           });
        
           const navigate =useNavigate()
@@ -25,9 +25,9 @@ function Addtask(props) {
           const handleClick = async (e) => {
             e.preventDefault();
             
-          const res = await axios.post(`http://localhost:5000/contactlist/addcontact/${props.data}`, credentials);
+          const res = await axios.post(`http://localhost:5000/task/`, credentials);
           console.log(res)
-        navigate(`/customerdetails/${props.data}`)
+        navigate(`/`)
     }
   return (
     <div>
@@ -37,20 +37,48 @@ function Addtask(props) {
 <Row className="mb-3">
 <Form.Group as={Col} className="mb-2 lInput" controlId="formBasicPassword" id='person' onChange={handleChange}>
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="" />
+        <Form.Control type="text" id="Name" placeholder="" />
       </Form.Group>
       <Form.Group as={Col} className="mb-2 lInput" controlId="formBasicPassword" id='designation' onChange={handleChange}>
         <Form.Label>End Date</Form.Label>
-        <Form.Control type="text" placeholder="" />
+        <Form.Control type="Date" placeholder="" id="Enddate" />
       </Form.Group>
       </Row>
-      <Form.Group className="mb-2 lInput" controlId="formBasicPassword" id='email' onChange={handleChange}>
-        <Form.Label>Status</Form.Label>
-        <Form.Control type="email" placeholder="" />
-      </Form.Group>
-      <Form.Group className="mb-2 lInput" controlId="formBasicPassword" id='mobile' onChange={handleChange}>
+      <Form.Group controlId="formBasicSelect">
         <Form.Label>Priority</Form.Label>
-        <Form.Control type="number" placeholder="" />
+        <Form.Control
+          as="select" 
+          id="Priority"
+          type="text"
+          onChange={handleChange}
+         >
+            <option value="Started">None</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+         
+        
+        </Form.Control>
+      </Form.Group>
+      <Form.Group controlId="formBasicSelect">
+        <Form.Label>Status</Form.Label>
+        <Form.Control
+          as="select" 
+          id="Status"
+          type="text"
+          onChange={handleChange}
+         >
+            <option value="Started">None</option>
+          <option value="Started">Started</option>
+          <option value="Completed">Completed</option>
+        
+        </Form.Control>
       </Form.Group>
       <Button variant="primary"  type="submit" onClick ={handleClick} className="button">
         Save

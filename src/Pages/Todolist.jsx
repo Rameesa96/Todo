@@ -19,6 +19,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import './todo.css'
 import Addtask from './Addtask';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: '#1e90ff',
@@ -91,13 +93,13 @@ export default function Todolist() {
     };
  
     const [data ,setData]=useState('')
-
+    const navigate=useNavigate()
     React.useEffect(()=>{
     axios.get('http://localhost:5000/task/getall').then(response=>{
         setData(response.data)
     })
-    },[])
-    console.log(data)
+    })
+  
 
   return (
     <section>
@@ -115,7 +117,7 @@ export default function Todolist() {
             <StyledTableCell align="right">Status</StyledTableCell>
            
             <StyledTableCell align="right">View</StyledTableCell>
-            <StyledTableCell align="right">Edit</StyledTableCell>
+            <StyledTableCell align="right">Delete</StyledTableCell>
      
           </TableRow>
         </TableHead>
@@ -127,8 +129,11 @@ export default function Todolist() {
               </StyledTableCell>
               <StyledTableCell align="right">{row.Priority}</StyledTableCell>
               <StyledTableCell align="right">{row.Status}</StyledTableCell>
-              <StyledTableCell align="right"><RemoveRedEyeIcon/></StyledTableCell>
-              <StyledTableCell align="right"><DeleteIcon/></StyledTableCell>
+              <StyledTableCell align="right"><Link to={`/task/${row._id}`}><RemoveRedEyeIcon style={{color:'#1e90ff'}}/></Link></StyledTableCell>
+              <StyledTableCell align="right"><DeleteIcon style={{color:'#1e90ff'}} onClick={()=>{
+                axios.delete(`http://localhost:5000/task/delete/${row._id}`)
+                navigate('/')
+              }}/></StyledTableCell>
     
             </StyledTableRow>
           ))}

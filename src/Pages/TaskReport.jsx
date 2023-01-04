@@ -17,6 +17,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';  
 import { Card } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -56,19 +57,16 @@ BootstrapDialogTitle.propTypes = {
 
 
 function TaskReport() {
-
+    const location =useLocation()
+    
+    const taskid = location.pathname.split("/")[2]
 
     const [credentials, setCredentials] = useState({
-      name: undefined,
-      country:undefined,
+      Name: undefined,
+      Priority:undefined,
       Status:undefined,
-              contact:undefined,
-              email:undefined,
-              Address:undefined,
-              contactperson: undefined,
-              Whatsppnumber:undefined,
-              city:undefined,
-              state:undefined
+              Enddate:undefined,
+         
         });
 const navigate = useNavigate()
  const handleChange = (e) => {
@@ -78,7 +76,7 @@ const navigate = useNavigate()
 const handleClick = async (e) => {
            
         e.preventDefault();
-        const data = await axios.post("http://localhost:5000/customer/postcustomer", credentials);
+        const data = await axios.post(`http://localhost:5000/task/${taskid}`, credentials);
         
         navigate(`/customerdetails/${data.data._id}`)
     }
@@ -103,7 +101,7 @@ const handleClick = async (e) => {
        
        <div className="form-group">
          <p required className='form-label field'>Name</p>
-         <input className="form-control"  type="text"   id="Address" onChange={handleChange}/>
+         <input className="form-control"  type="text"  defaultValue={} id="Address" onChange={handleChange}/>
        </div>
      </div>
      <div className='customersform1'>

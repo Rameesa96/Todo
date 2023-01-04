@@ -9,7 +9,7 @@ function App() {
       
       <Routes>
         <Route path='/' element={<Todolist/>}/>
-        <Route path='/task' element={<TaskReport/>}/>
+        <Route path='/task/:id' element={<TaskReport/>}/>
       </Routes>
     </div>
   );
