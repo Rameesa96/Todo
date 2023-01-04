@@ -96,7 +96,7 @@ export default function Todolist() {
     const [data ,setData]=useState('')
     const navigate=useNavigate()
     React.useEffect(()=>{
-    axios.get('http://localhost:5000/task/getall').then(response=>{
+    axios.get('https://todo12.adaptable.app/task/getall').then(response=>{
         setData(response.data)
     })
     })
@@ -134,7 +134,7 @@ export default function Todolist() {
        }</StyledTableCell>
               <StyledTableCell align="right"><Link to={`/task/${row._id}`}><RemoveRedEyeIcon style={{color:'#1e90ff'}}/></Link></StyledTableCell>
               <StyledTableCell align="right"><DeleteIcon style={{color:'#1e90ff'}} onClick={()=>{
-                axios.delete(`http://localhost:5000/task/delete/${row._id}`)
+                axios.delete(`https://todo12.adaptable.app/task/delete/${row._id}`)
                 navigate('/')
               }}/></StyledTableCell>
     

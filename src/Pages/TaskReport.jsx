@@ -76,7 +76,7 @@ function TaskReport() {
 const handleClick = async (e) => {
            
         e.preventDefault();
-        const data = await axios.put(`http://localhost:5000/task/edit/${taskid}`, credentials);
+        const data = await axios.put(`https://todo12.adaptable.app/task/edit/${taskid}`, credentials);
         
         
     }
@@ -84,7 +84,7 @@ const handleClick = async (e) => {
     const [data ,setData]=useState('')
     
     React.useEffect(()=>{
-    axios.get(`http://localhost:5000/task/${taskid}`).then(response=>{
+    axios.get(`https://todo12.adaptable.app/task/${taskid}`).then(response=>{
         setData(response.data)
     })
     })

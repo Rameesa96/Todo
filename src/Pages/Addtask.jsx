@@ -25,7 +25,7 @@ function Addtask(props) {
           const handleClick = async (e) => {
             e.preventDefault();
             
-          const res = await axios.post(`http://localhost:5000/task/`, credentials);
+          const res = await axios.post(`https://todo12.adaptable.app/task/`, credentials);
           console.log(res)
         navigate(`/`)
     }
