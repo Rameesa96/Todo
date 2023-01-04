@@ -16,6 +16,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';  
 import DeleteIcon from '@mui/icons-material/Delete';
+import FlagIcon from '@mui/icons-material/Flag';
 import './todo.css'
 import Addtask from './Addtask';
 import axios from 'axios';
@@ -127,8 +128,10 @@ export default function Todolist() {
               <StyledTableCell component="th" scope="row">
                 {row.Name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.Priority}</StyledTableCell>
-              <StyledTableCell align="right">{row.Status}</StyledTableCell>
+              <StyledTableCell align="right">{row.Priority}{row.Priority<5?<FlagIcon sx={{color:"rgb(181, 22, 22)"}}/>:<FlagIcon sx={{color:"rgb(20, 109, 20)"}}/>}</StyledTableCell>
+              <StyledTableCell align="right">{row.Status==='Completed'?<div className='complted'>{row.Status}</div>:row.Status==='Canceled'?
+              <div className='canceld'>{row.Status}</div>:<div className='started'>{row.Status}</div>
+       }</StyledTableCell>
               <StyledTableCell align="right"><Link to={`/task/${row._id}`}><RemoveRedEyeIcon style={{color:'#1e90ff'}}/></Link></StyledTableCell>
               <StyledTableCell align="right"><DeleteIcon style={{color:'#1e90ff'}} onClick={()=>{
                 axios.delete(`http://localhost:5000/task/delete/${row._id}`)

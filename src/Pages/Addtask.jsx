@@ -49,7 +49,7 @@ function Addtask(props) {
         <Form.Control
           as="select" 
           id="Priority"
-          type="text"
+          type="Number"
           onChange={handleChange}
          >
             <option value="Started">None</option>
@@ -66,7 +66,7 @@ function Addtask(props) {
         
         </Form.Control>
       </Form.Group>
-      <Form.Group controlId="formBasicSelect">
+      <Form.Group controlId="formBasicSelect" style={{marginTop:20}}>
         <Form.Label>Status</Form.Label>
         <Form.Control
           as="select" 
